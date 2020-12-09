@@ -71,11 +71,12 @@ const Btn = styled.span`
     color: white;
     cursor: pointer;
     &:first-child {
-        border-right: 3px solid #fff;
-        padding-right: 1rem;
+        border-right: 2px solid #fff;
+        padding-right: 2rem;
     }
     &:last-child {
-        margin-left: 1rem;
+        margin-left: 2rem;
+        margin-right: 3rem;
     }
     @media (min-width: ${props => props.theme.breakpointMobile}) and (max-width: ${props =>
             props.theme.breakpointTablet}) {
