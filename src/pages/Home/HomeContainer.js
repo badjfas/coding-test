@@ -47,7 +47,7 @@ const HomeContainer = () => {
     //데이터 패칭
     const getData = async () => {
         try {
-            return await axios.get("http://114.205.86.189:4000/requests");
+            return await axios.get("http://localhost:4000/requests");
         } catch (e) {
             console.warn(e);
         }
