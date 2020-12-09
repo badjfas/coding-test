@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FiMenu } from "react-icons/fi";
+import { BuildingWhite } from "./svg/Icons";
+
 import Drawer from "./Home/Drawer";
 const Wrapper = styled.div`
     width: 100%;
@@ -70,9 +72,13 @@ const Btn = styled.span`
     font-weight: ${props => props.theme.buttonFontWeight};
     color: white;
     cursor: pointer;
+
     &:first-child {
         border-right: 2px solid #fff;
         padding-right: 2rem;
+        > svg {
+            margin-right: 0.5rem;
+        }
     }
     &:last-child {
         margin-left: 2rem;
@@ -105,7 +111,9 @@ const Header = () => {
                 </Title>
             </TitleBox>
             <BtnBox>
-                <Btn>A 가공업체</Btn>
+                <Btn>
+                    <BuildingWhite />A 가공업체
+                </Btn>
                 <Btn>로그아웃</Btn>
             </BtnBox>
         </Wrapper>
