@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import { Building, Logo } from "../svg/Icons";
+import { Building } from "../svg/Icons";
 const Overlay = styled.div`
     display: ${props => (props.visible ? "flex" : "none")};
     flex-direction: column;
@@ -75,7 +75,7 @@ const Drawer = ({ open, setOpen }) => {
             <Wrapper visible={open}>
                 <TitleBox visible={open}>
                     {/* <span>CAPA 파트너스</span> */}
-                    <img src={"/svg/logo-blue.svg"} />
+                    <img src={"/svg/logo-blue.svg"} alt="" />
                 </TitleBox>
                 <MenuLists visible={open}>
                     <List>

@@ -90,7 +90,7 @@ const Btn = styled.button`
     }
 `;
 const Card = ({ data }) => {
-    const { id, title, client, due, count, material, method, status, amount, docs } = data;
+    const { title, client, due, count, material, method, status, amount, docs } = data;
     return (
         <Wrapper>
             <TitleBox>

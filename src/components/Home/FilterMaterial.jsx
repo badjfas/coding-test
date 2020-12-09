@@ -40,10 +40,11 @@ const Label = styled.label`
     background-color: #fff;
     color: #000;
 `;
-const Filter = ({ active, setActived, setMaterial, checked, setChecked }) => {
+const Filter = ({ active, setActived, setMaterial, checked, setChecked, item, handleItemCount, setItem }) => {
     return (
         <Wrapper id="material" active={active} onClick={() => setActived({ ...active, material: !active })}>
-            재료 <IoMdArrowDropdown />
+            {item.length === 0 ? "재료" : `재료(${item.length})`}
+            <IoMdArrowDropdown />
             <SelectBox active={active}>
                 <Label>
                     <input
@@ -54,6 +55,7 @@ const Filter = ({ active, setActived, setMaterial, checked, setChecked }) => {
                         onClick={() => {
                             setChecked({ ...checked, material1: !checked.material1 });
                             setMaterial("알루미늄");
+                            handleItemCount("알루미늄");
                         }}
                     />
                     <span>알루미늄</span>
@@ -67,6 +69,7 @@ const Filter = ({ active, setActived, setMaterial, checked, setChecked }) => {
                         onClick={() => {
                             setChecked({ ...checked, material2: !checked.material2 });
                             setMaterial("탄소강");
+                            handleItemCount("탄소강");
                         }}
                     />
                     탄소강
@@ -80,6 +83,7 @@ const Filter = ({ active, setActived, setMaterial, checked, setChecked }) => {
                         onClick={() => {
                             setChecked({ ...checked, material3: !checked.material3 });
                             setMaterial("구리");
+                            handleItemCount("구리");
                         }}
                     />
                     구리
@@ -93,6 +97,7 @@ const Filter = ({ active, setActived, setMaterial, checked, setChecked }) => {
                         onClick={() => {
                             setChecked({ ...checked, material4: !checked.material4 });
                             setMaterial("합금강");
+                            handleItemCount("합금강");
                         }}
                     />
                     합금강
@@ -106,6 +111,7 @@ const Filter = ({ active, setActived, setMaterial, checked, setChecked }) => {
                         onClick={() => {
                             setChecked({ ...checked, material5: !checked.material5 });
                             setMaterial("강철");
+                            handleItemCount("강철");
                         }}
                     />
                     강철

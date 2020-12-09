@@ -7,13 +7,13 @@ const Wrapper = styled.div`
     grid-template-rows: repeat(1, 1fr);
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
-    padding: 1rem;
     width: 100%;
     @media (min-width: ${props => props.theme.breakpointMobile}) and (max-width: ${props =>
             props.theme.breakpointTablet}) {
         display: grid;
         grid-template-rows: repeat(1, 1fr);
         grid-template-columns: repeat(1, 1fr);
+        padding: 1rem;
     }
 `;
 

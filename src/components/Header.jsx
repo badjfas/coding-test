@@ -100,7 +100,7 @@ const Header = () => {
                     <FiMenu />
                 </button>
                 <Title>
-                    <img src={"/svg/logo.svg"} />
+                    <img src={"/svg/logo.svg"} alt={""} />
                 </Title>
             </TitleBox>
             <BtnBox>

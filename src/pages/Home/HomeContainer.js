@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomePresenter from "./HomePresenter";
 import axios from "axios";
 const HomeContainer = () => {
@@ -6,13 +6,16 @@ const HomeContainer = () => {
 
     const [resetData, setResetData] = useState([]);
 
+    //상담 중인 요청
     const [consulting, setConsulting] = useState(false);
 
+    //체크박스 열림&닫힘
     const [active, setActived] = useState({
         process: false,
         material: false
     });
 
+    //체크박스 표시
     const [checked, setChecked] = useState({
         process1: false,
         process2: false,
@@ -22,10 +25,26 @@ const HomeContainer = () => {
         material4: false,
         material5: false
     });
+
+    //가공방식 필터링
     const [process, setProcess] = useState("");
 
+    //재료 필터링
     const [material, setMaterial] = useState("");
 
+    //재료 갯수
+    const [item, setItem] = useState([]);
+
+    //재료 갯수 함수
+    const handleItemCount = args => {
+        if (!!item.find(e => e === args)) {
+            setItem(item.filter(e => e !== args));
+        } else {
+            setItem([...item, args]);
+        }
+    };
+
+    //데이터 패칭
     const getData = async () => {
         try {
             return await axios.get("http://114.205.86.189:4000/requests");
@@ -34,6 +53,7 @@ const HomeContainer = () => {
         }
     };
 
+    //리셋 버튼 함수
     const onClickReset = () => {
         setConsulting(false);
         setActived({ process: false, material: false });
@@ -46,18 +66,19 @@ const HomeContainer = () => {
             material4: false,
             material5: false
         });
+        setItem([]);
         setData([...resetData]);
     };
 
+    //데이터 이팩트
     useEffect(() => {
-        if (data !== undefined) {
-            getData().then(result => {
-                setData([...result.data]);
-                setResetData([...result.data]);
-            });
-        }
+        getData().then(result => {
+            setData([...result.data]);
+            setResetData([...result.data]);
+        });
     }, []);
 
+    //가공방식 필터링 이펙트
     useEffect(() => {
         let arr = [];
         data.map(request =>
@@ -65,11 +86,13 @@ const HomeContainer = () => {
                 if (e === process) {
                     arr.push(request);
                 }
+                return request;
             })
         );
         setData([...arr]);
     }, [process]);
 
+    //재료 필터링 이펙트
     useEffect(() => {
         let arr = [];
         data.map(request =>
@@ -83,6 +106,7 @@ const HomeContainer = () => {
         setData(arr);
     }, [material]);
 
+    //상담 상태 이펙트
     useEffect(() => {
         let arr = [];
         data.find(request => {
@@ -97,6 +121,7 @@ const HomeContainer = () => {
         setData(arr);
     }, [consulting]);
 
+    //셀렉트 방식 영역 밖 클릭시 닫힘
     const handleCloseSelectBox = e => {
         if (e.target.id === "process" || e.target.id === "material") {
             return;
@@ -105,10 +130,13 @@ const HomeContainer = () => {
         }
     };
 
+    //셀렉트 방식 영역 밖 클릭 시 & 스크롤 시 닫힘
     useEffect(() => {
         document.getElementById("cardbox").addEventListener("click", handleCloseSelectBox);
+        document.getElementById("cardbox").addEventListener("scroll", handleCloseSelectBox);
         return () => {
             document.getElementById("cardbox").removeEventListener("click", handleCloseSelectBox);
+            document.getElementById("cardbox").removeEventListener("scroll", handleCloseSelectBox);
         };
     });
 
@@ -124,6 +152,9 @@ const HomeContainer = () => {
             onClickReset={onClickReset}
             setChecked={setChecked}
             checked={checked}
+            item={item}
+            setItem={setItem}
+            handleItemCount={handleItemCount}
         />
     );
 };

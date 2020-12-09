@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Cards from "../../components/Home/Cards";
 import FilterProcess from "../../components/Home/FilterProcess";
 import FilterMaterial from "../../components/Home/FilterMaterial";
-import { GrPowerReset } from "react-icons/gr";
 import ToggleBtn from "../../components/Home/ToggleBtn";
 import { Refresh } from "../../components/svg/Icons";
 const Container = styled.div`
@@ -100,7 +99,10 @@ const HomePresenter = ({
     setMaterial,
     onClickReset,
     checked,
-    setChecked
+    setChecked,
+    item,
+    setItem,
+    handleItemCount
 }) => {
     return (
         <Container id="cardbox">
@@ -126,6 +128,9 @@ const HomePresenter = ({
                             setMaterial={setMaterial}
                             checked={checked}
                             setChecked={setChecked}
+                            item={item}
+                            setItem={setItem}
+                            handleItemCount={handleItemCount}
                         />
                         <ResetBtn onClick={onClickReset}>
                             <Refresh />
