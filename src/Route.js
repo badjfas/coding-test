@@ -1,14 +1,14 @@
-import Reactf from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Header from "./components/Header";
 import { Detail, Home } from "./pages";
-// import Home from "./pages";
 
 const Routes = () => {
     return (
         <Router>
+            <Header />
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/detail/:id" component={Detail} />
             </Switch>
         </Router>
     );
