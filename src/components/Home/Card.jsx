@@ -2,19 +2,21 @@ import React from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-    width: 366px;
     max-height: 356px;
     padding: 24px 16px 24px 16px;
     border: 1px solid ${props => props.theme.borderGray};
     margin-bottom: 1rem;
+    cursor: pointer;
     &:hover {
         border: 1px solid ${props => props.theme.blueColor};
     }
 `;
+
 const TitleBox = styled.div`
     border-bottom: 1px solid ${props => props.theme.borderGray};
     padding-bottom: 1rem;
-    > p {
+    position: relative;
+    > div {
         .title {
             font-weight: ${props => props.theme.bold};
             line-height: 24px;
@@ -29,6 +31,22 @@ const TitleBox = styled.div`
             padding-top: 2rem;
             color: ${props => props.theme.fontGray};
         }
+    }
+`;
+
+const StatusChip = styled.div`
+    position: absolute;
+    top: 0;
+    right: 10px;
+    padding: 2px 8px 2px 8px;
+    border-radius: 12px;
+    border: 1px solid #ffa000;
+    height: 24px;
+    > span {
+        color: #ffa000;
+        font-weight: ${props => props.theme.buttonFontWeight};
+        line-height: 20px;
+        font-size: 12px;
     }
 `;
 
@@ -68,15 +86,15 @@ const Btn = styled.button`
     &:last-child {
         border: 2px solid ${props => props.theme.blueColor};
         color: ${props => props.theme.blueColor};
+        background-color: #fff;
     }
 `;
 const Card = ({ data }) => {
     const { id, title, client, due, count, material, method, status, amount, docs } = data;
-    console.log(method.join(","));
     return (
         <Wrapper>
             <TitleBox>
-                <p>
+                <div>
                     <span className="title">{title}</span>
                     <br />
                     <span className="client">{client}</span>
@@ -84,7 +102,12 @@ const Card = ({ data }) => {
                     <div className="due">
                         <span>{due}까지 납기</span>
                     </div>
-                </p>
+                </div>
+                {status === "상담중" ? (
+                    <StatusChip>
+                        <span>{status}</span>
+                    </StatusChip>
+                ) : null}
             </TitleBox>
 
             <InfoBox>

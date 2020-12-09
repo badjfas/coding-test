@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { FiMenu } from "react-icons/fi";
+import Drawer from "./Home/Drawer";
 const Wrapper = styled.div`
     width: 100%;
     display: flex;
@@ -10,16 +11,55 @@ const Wrapper = styled.div`
     align-items: center;
     top: 0;
     height: 70px;
+    z-index: 8000;
+    @media (min-width: ${props => props.theme.breakpointMobile}) and (max-width: ${props =>
+            props.theme.breakpointTablet}) {
+        height: 44px;
+    }
 `;
 
 const TitleBox = styled.div`
-    margin-left: 2rem;
+    margin-left: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+        display: none;
+    }
+    @media (min-width: ${props => props.theme.breakpointMobile}) and (max-width: ${props =>
+            props.theme.breakpointTablet}) {
+        height: 44px;
+        margin-left: 0.3rem;
+
+        button {
+            display: flex;
+            background-color: transparent;
+            border: none;
+            font-size: 1.5rem;
+            svg {
+                display: flex;
+                color: white;
+            }
+        }
+    }
 `;
 
-const Title = styled.span`
+const Title = styled.div`
     color: white;
     font-size: 1.5rem;
     font-weight: ${props => props.theme.bold};
+
+    @media (min-width: ${props => props.theme.breakpointMobile}) and (max-width: ${props =>
+            props.theme.breakpointTablet}) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1rem;
+        img {
+            margin-left: 0.8rem;
+            height: 0.8rem;
+        }
+    }
 `;
 
 const BtnBox = styled.div`
@@ -37,13 +77,31 @@ const Btn = styled.span`
     &:last-child {
         margin-left: 1rem;
     }
+    @media (min-width: ${props => props.theme.breakpointMobile}) and (max-width: ${props =>
+            props.theme.breakpointTablet}) {
+        display: none;
+    }
 `;
 
 const Header = () => {
+    const [open, setOpen] = useState(false);
+    useEffect(() => {
+        if (open) {
+            document.getElementById("cardbox").style.cssText = "overflow : hidden;";
+        } else {
+            document.getElementById("cardbox").style.cssText = "overflow : scroll;";
+        }
+    }, [open]);
     return (
         <Wrapper>
+            <Drawer setOpen={setOpen} open={open} />
             <TitleBox>
-                <Title>CAPA 파트너스</Title>
+                <button onClick={() => setOpen(!open)}>
+                    <FiMenu />
+                </button>
+                <Title>
+                    <img src={"/svg/logo.svg"} />
+                </Title>
             </TitleBox>
             <BtnBox>
                 <Btn>A 가공업체</Btn>
